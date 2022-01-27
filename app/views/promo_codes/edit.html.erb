@@ -1,0 +1,29 @@
+
+  <div class="inr-midle-wrp">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="registr-inr">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <a href="#"><%#= image_tag "panel-logo.png", class: "img-responsive" %></a>
+              </div>
+              <div class="panel-body">
+                <div class="panrl-body-inr">
+                  <h4>Please note that you can edit only code value here.</h4>
+                  <div class="panel-bx-login">
+					<%= form_for @promo_code, url: promo_code_path(@promo_code) do |f| %>
+                    	<%= render partial: 'form', locals: {f: f}%>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% content_for :name do %>
+  Edit Promo Code
+<% end %>

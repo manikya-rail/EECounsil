@@ -1,0 +1,10 @@
+<h3>Hello, <%= @schedule.therapist.first_name.capitalize %> <%= @schedule.therapist.last_name.capitalize %></h3>
+
+<h3>Welcome to Ecounsel</h3>
+
+<p>This is a notification mail to notify that <%= @schedule.patient.first_name.capitalize %> want to book a schedule with you.</p>
+
+
+<h3>DO NOT REPLY</h3>
+
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">

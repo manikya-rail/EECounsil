@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  status: MyString
+  schedule: one
+  description: MyString
+  therapist: one
+  charge_id: MyString
+  transfer_id: MyString
+
+two:
+  patient: two
+  status: MyString
+  schedule: two
+  description: MyString
+  therapist: two
+  charge_id: MyString
+  transfer_id: MyString

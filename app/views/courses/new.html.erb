@@ -1,0 +1,89 @@
+<div class="inr-midle-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="course_edit_div">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="panrl-body-inr">
+                <div class="panel-bx-login">
+                  <%= form_for @course do |f| %>
+                    <% if @course.errors.any? %>
+                      <div id="error_explanation" align="center">
+                        <% @course.errors.full_messages.each do |message| %>
+                          <p><%= message %></p>
+                        <% end %>
+                      </div>
+                    <% end %>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="frm-grp-inr">
+                          <%= f.fields_for :media do |i| %>
+                            <%= i.label :Select_banner_image %>:<br/>
+                            <%= i.file_field :item, class: "form-control", accept:'image/*' %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="frm-grp-inr">
+                            <%= f.label :Course_Name %>:<br/>
+                            <%= f.text_field :name, class: "form-control" %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="frm-grp-inr">
+                            <%= f.label :free_months %>:<br/>
+                            <%= f.number_field :free_months, class: "form-control" %>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="frm-grp-inr">
+                          <%= f.label :Course_Description %>:<br/>
+                          <%= f.cktext_area :description %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="frm-grp-inr">
+                          <%= f.label :Course_Price %>:<br/>
+                          <%= f.text_field :price, class: "form-control" %>
+                      </div>
+                    </div>
+                    <%= f.label :Course_pages %>:<br/>
+                    <div id='course_sessions'>
+                      <%= f.fields_for :course_sessions do |course_session| %>
+                        <%#= render 'course_session_fields', :f => course_session %>
+                      <% end %>
+                      <div class='links form-group'>
+                        <%= link_to_add_association 'Add new course page', f, :course_sessions, class: "btn btn-success"%>
+                      </div>
+                    </div>
+                    <div>
+                      <%= f.submit 'Add Course', class: "btn btn-success" ,id: 'sub_btn'%>
+                      <div class="loader_img">
+                        Please wait while your files are uploading........
+                        <%= image_tag("loader.jpg", id: "img_prev", size: "70x60")%>
+                      </div>
+                    </div>
+                    <% end %>
+                    <br>
+                  <%= link_to 'Back' , courses_path, class: 'btn btn-default' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :name do %>
+  Add Course
+<% end %>

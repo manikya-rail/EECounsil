@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Appointment</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=<%= APP_CONFIG['GOOGLE_API_KEY'] %>"></script>
+    <%= javascript_include_tag 'application' %>
+    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+    <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
+    <script src='//underscorejs.org/underscore-min.js' type='text/javascript'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="logo-head">
+            <% link_to "index.html" %>
+            <%= image_tag "logo.png", class: "img-responsive logo-fixed" %>
+            <%= image_tag "logo-sticky.png",  class: "img-responsive logo-sticky" %>
+          </div>
+          <div class="head-nav-bar">
+            <div class="slimmenu">
+              <div class="slimmenu-inr">
+                <ul>
+                  <% if user_signed_in? %>
+                    <% if can? :manage , :all %>
+                      <li><%= link_to "Home", root_path %></li>
+                      <li><%= link_to "Patient List", users_index_path(role_name: 'patient') %></li>
+                      <li><%= link_to "Therapist List", users_index_path(role_name: 'therapist') %></li>
+                      <li><%= link_to "Schedules", schedules_path %></li>
+                      <li><%= link_to "Therapist Payment Details", therapists_path %></li>
+                      <li><%= link_to "User Locations", locations_path %></li>
+                    <% end %>
+                      <li class="dropdown">
+                        <a><span><i class="fa fa-dashboard"></i> Dashboard</a></span>
+                      <ul>
+                        <li><%= link_to "My Profile", show_path(current_user) %></li>
+                        <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+                      </ul>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="page-main-header" style="background-image: url(<%= asset_path('page-header.jpg') %>);">
+      <div class="container">
+        <div class="row">
+          <div class="page-main-inr">
+            <h1><%= yield :name %></h1>
+            <p><%= yield :sub_text %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+    <% if notice.present? %>
+    <p class="notice alert alert-success alert-dismissible"><%= notice %>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    </p>
+    <% elsif alert.present? %>
+    <p class="notice alert alert-danger alert-dismissible"><%= alert %>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    </p>
+    <% end %>
+    </div>
+    <%= yield %>
+    <footer class="footer">
+      <div class="container">
+        <div class="f-box f-1">
+          <div class="f-logo"><%= image_tag "logo.png", class: "img-responsive logo-fixed" %></div>
+          <p>Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Donec dictum ligula lectus,
+          faucibus placerat.</p>
+          <p>Blandit enim lacinia sed. Ut feugiat augue mollis ligula consectetur, non semper felis fringilla.</p>
+        </div>
+        <div class="f-box f-2">
+          <h4>Social </h4>
+          <ul>
+            <li><a href="javascript:void(0)"><i class="fa fa-facebook-f"></i>Facebook</a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i>Twitter</a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i>Google+</a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i>Linkedin</a></li>
+          </ul>
+        </div>
+        <div class="f-box f-3">
+          <h4>Quick Links </h4>
+          <ul>
+            <li><a href="javascript:void(0)">Home</a></li>
+            <li><a href="javascript:void(0)">About Us</a></li>
+            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+            <li><a href="javascript:void(0)">Insurance</a></li>
+            <li><a href="javascript:void(0)">About Online Counseling</a></li>
+            <li><a href="javascript:void(0)">Partners</a></li>
+            <li><a href="javascript:void(0)">SELF HELP</a></li>
+            <li><a href="javascript:void(0)">Self-Tests</a></li>
+          </ul>
+        </div>
+        <div class="f-box f-4">
+          <h4>GET IN TOUCH</h4>
+          <p> <span>Address</span> 12/5 Streethouse, Block-12 Newyork </p>
+          <p><span>Phone</span> +1-2345-564789</p>
+          <p><span>Email</span> info@example.com</p>
+        </div>
+      </div>
+    </footer>
+    <div class="copy">
+      <div class="container">
+        <ul>
+          <li><a href="javascript:void(0)">Privacy Policy</a></li>
+          <li><a href="javascript:void(0)">Terms &amp; Conditions</a></li>
+        </ul>
+        <p>Copyright © 2019 eCounsel. All Rights Reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>

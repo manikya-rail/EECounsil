@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recipient_id: 1
+  patient_id: 1
+  therapist_id: 1
+  action: MyString
+  content: MyString
+
+two:
+  recipient_id: 1
+  patient_id: 1
+  therapist_id: 1
+  action: MyString
+  content: MyString

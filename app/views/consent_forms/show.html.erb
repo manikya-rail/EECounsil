@@ -1,0 +1,23 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-dtl-rgt">
+          <div class="blg-dtl-img">
+            <p>
+              <strong>Code:</strong>
+              <%= @consent_form.name %>
+            </p>
+
+            <p>
+              <strong>Description:</strong>
+              <%= @consent_form.content %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_consent_form_path(@consent_form), class: "btn btn-default btn-blue"%>
+    <%= link_to 'Back', consent_forms_path, class: 'btn btn-default'%>
+  </div>
+</div>

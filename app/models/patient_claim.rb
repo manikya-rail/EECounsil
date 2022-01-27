@@ -1,0 +1,2 @@
+class PatientClaim < ApplicationRecord
+end

@@ -1,0 +1,20 @@
+<br/>
+<div style="max-width: 400px;width: 100%;margin:0 auto;border: 1px solid #000; display: table;">
+  <div style="width: 100%;float: left;padding: 30px 15px;box-sizing: border-box;background-image: url('/assets/header-top - Copy.jpg');background-size: cover;background-repeat: no-repeat;">
+  </div>
+  <h3 style="padding: 30px 30px 0px 30px">This is a HIPAA compliant platform</h3>
+  <p style="color: #000;padding: 30px 30px 15px 30px;box-sizing: border-box;line-height: 2.5;text-align: justify;float: left;width: 100%;">
+    <%= "#{@user.full_name} is asking that you register here for their Online Office. It’s very simple and quick. Now you can receive therapy by video conference at any location of your choice on a private and securely encrypted online platform. Your rate per session will be $#{@default_rate} per hour "%>
+  </p>
+  <div style="width:100%;float: left;padding: 0 30px 30px 30px;box-sizing: border-box;cursor: pointer;">
+    <p>Please click on the link below to register with <%= @user.full_name%>:</p>
+    <%= link_to 'Register', "#{APP_CONFIG['APP_URL']}/therapist/#{@user.id}/patient_register?default_rate=#{@default_rate}&form_ids=#{@form_ids}", style: "background: #428503;border: 0px;padding: 10px 30px;border-radius: 31px;color: #fff;font-size: 20px;margin-bottom: 5px;cursor: pointer; text-decoration: none;" %>
+  </div>
+  <h3 style="padding: 30px 30px 0px 30px">DO NOT REPLY</h3>
+
+  <div style="width:50px;margin-bottom: 10px;margin-left: 30px;margin-top: 30px">
+    <img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">
+  </div>
+</div>
+<br/>
+

@@ -1,0 +1,32 @@
+<% if @service_code.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @service_code.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+<% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :service_type_code, autofocus: true, autocomplete: "service_type_code",
+        class: 'form-control', placeholder: "service_type_code" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :description, autofocus: true, autocomplete: "description",
+        class: 'form-control', placeholder: "description" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="submit-btn text-center">
+  <%= f.submit  @service_code.new_record? ? 'Add Service Code' : 'Update Service Code' ,class: "btn btn-default btn-blue"%>
+</div>

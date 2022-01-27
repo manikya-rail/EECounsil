@@ -1,0 +1,117 @@
+<%= form_for @package do |f| %>
+  <% if @package.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @package.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="inr-midle-wrp">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="registr-inr">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="panrl-body-inr">
+                  <div class="panel-bx-login">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="frm-grp-inr">
+                            <%= f.label :Name %>:<br/>
+                            <%= f.text_field :name, autofocus: true, autocomplete: "Name",
+                            class: 'form-control', placeholder: "Name" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="frm-grp-inr">
+                            <%= f.label :Details %>:<br/>
+                            <%= f.cktext_area :details,class: 'form-control', placeholder: "Details" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="frm-grp-inr">
+                            <%= f.label :'Validity in days'%>:<br/>
+                            <%= f.text_field :validity_in_days, autofocus: true, autocomplete: "Validity in days",
+                            class: 'form-control', placeholder: "Validity in days" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <%= f.fields_for :package_plans do |form| %>
+                      <div class='nested-fields'>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <div class="frm-grp-inr">
+                              <%= form.label :Select_plan_type %><br/>
+                              <%= form.select :plan_type, PackagePlan.plan_types.keys, {}, class: "hide_field",style: "width: 100%;", onchange: "planChange(event)" %><br>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <div class="frm-grp-inr">
+                              <%= form.label :Quantity %>
+                              <%= form.text_field :quantity, class: "form-control" , placeholder: "Quantity"%>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <div class="frm-grp-inr">
+                              <%= form.label :Interval %>
+                              <%= form.select :interval, PackagePlan.intervals.keys, {}, class: "form-control" %>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group hide_if_text_plan">
+                            <div class="frm-grp-inr">
+                              <%= form.label :'Time_Duration(In hours)' %>:<br>
+                              <%= form.text_field :time_duration_in_hours, autofocus: true, autocomplete: "Time Duration(In hours)",
+                                class: 'form-control', placeholder: "Time Duration(In hours)" %>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <div class="frm-grp-inr">
+                              <%= form.label :'Price per quantity' %>:<br>
+                              <%= form.text_field :price_per_quantity, autofocus: true, autocomplete: "Price per quantity",
+                                class: 'form-control', placeholder: "Price per quantity" %>
+                            </div>
+                          </div>
+                        </div>
+                        <%= link_to_remove_association "Remove Option", form, class: "btn btn-danger" %>
+                      </div><br/>
+                    <% end %>
+
+                    <div class='links'>
+                      <%= link_to_add_association 'Add Plan', f, :package_plans, class: "btn btn-primary" %>
+                    </div><br/>
+                    <%= f.submit 'Save',class: 'btn btn-success' %><br/>
+                    <%= link_to 'Back' , packages_path, class: 'btn btn-default'%>
+
+                  <% content_for :name do %>
+                    Edit Package
+                  <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

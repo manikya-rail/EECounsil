@@ -1,0 +1,116 @@
+<div class="abt-us-wrp data-table_">
+  <div class="container">
+    <table id="user-datatable" data-source="<%= users_index_path(role_name: params[:role_name], format: :json) %>">
+      <div style="margin: 20px 20px 20px 0px;">
+        <% if params[:role_name] == 'patient'%>
+        <%= link_to 'Add New Patient', new_patient_path, class: 'btn btn-success' %>
+        <% elsif params[:role_name] == 'therapist' %>
+        <%= link_to 'Add New Therapist', new_therapist_path, class: 'btn btn-success'%>
+        <% else %>
+        <%#= render ''%>
+        <% end %>
+      </div>
+      <hr>
+      <h3><%= params[:role_name].capitalize%> List </h3>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Birth Date</th>
+          <th>Gender</th>
+          <th>Status</th>
+          <th>Action</th>
+          <% if params[:role_name] == 'therapist' %>
+          <th>Approved</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <br>
+
+    <style type="text/css"></style>
+    <script>
+
+      jQuery(document).ready(function() {
+        $('#user-datatable').dataTable({
+
+          "processing": true,
+          "serverSide": true,
+          "columnDefs": [{ "orderable": false, "targets": -1 }],
+          "ajax": $('#user-datatable').data('source'),
+          "pagingType": "full_numbers",
+          "columns": [
+          {"data": "id"},
+          {"data": "first_name"},
+          {"data": "last_name"},
+          {"data": "email",
+          "render": function(data, type, row, meta){
+            if(type === 'display'){
+              data = '<a href=' + row.id + '/show_profile>' + data + '</a>';
+            }
+            return data;
+          }},
+          {"data": "birth_date"},
+          {"data": "gender"},
+          {"data": "status",
+          "render": function(data, type, row, meta){
+            if(type === 'display' && row.deleted_at == ''){
+              data = "<a href="+row.id+"/update_user_status?status="+data+" class='btn btn-info' data-remote='true' id=status_"+row.id+">"+data+ "</a>";
+            }
+            else
+            {
+              data = "<a href='#' class='btn btn-info' data-remote='true' id=status_"+row.id+" disabled>"+data+ "</a>";
+            }
+            return data;
+          }},
+          {"data": "Action",
+          "render": function(data, type, row, meta){
+            if(type === 'display' && row.deleted_at == ''){
+              data = "<a onClick='delete_user("+row.id+",\"<%=params[:role_name]%>\");' class='btn btn-danger' remote='true'>"+"Delete"+ "</a>"
+            }else
+            {
+              data = "<a class='btn btn-danger' remote='true' disabled>"+"Deleted"+ "</a>"
+            }
+            return data;
+          }},
+          <% if params[:role_name] == 'therapist'%>
+          {"data": "approved",
+          "render": function(data, type, row, meta){
+            if(type === 'display'){
+              if(row.approved == "false"){
+               data = "<span id=approve_column"+row.id+"><a href="+row.id+"/update_approval_status?approved="+true+" class='btn btn-success' data-remote='true' id=approve_accept_"+row.id+">"+"Accept "+ "</a> <a data-confirm='Are you sure?' href='"+row.id+"/delete_profile' class='btn btn-danger'>"+"Decline"+ "</a></span>";
+             }
+             else{
+              data = "<span style='margin-left: 14%;' >Approved</span>"
+            }
+          }
+          return data;
+        }
+      },
+      <% end %>
+
+      ]
+                // pagingType is optional, if you want full pagination controls.
+                // Check dataTables documentation to learn more about
+                // available options.
+              });
+      });
+
+    </script>
+
+    <% if params[:role_name] == 'therapist'%>
+    <% content_for :name do %>
+    List of Therapist
+    <% end %>
+    <% else %>
+    <% content_for :name do %>
+    List of Patients
+    <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class='container' style="width: 355px">
+  <%= form_for Skill.new do |f| %>
+    <div style="text-align: center; font-family: none; font-size: 25px">
+      <%= f.label :add_skills%>
+    </div>
+    <div class='form_field field'>
+      <div class='row xyz'>
+        <div class="col-md-10">
+          <%= f.text_field :name, class: 'text-field-cls', name: 'skill[name][]'%>
+        </div>
+        <div class="col-md-2">
+          <%= link_to ' ','javascript:void(0)', class: 'remove-field btn btn-danger fa fa-close' %>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin: 8px" >
+
+    <%= link_to ' ','javascript:void(0)', class: 'add_more btn btn-info fa fa-plus' %>
+    </div>
+    <div style="text-align: center; margin-top: 10px">
+      <%= f.submit "Add", class: 'btn add-skill-button'%>
+    </div>
+   <% end %>
+   <%= link_to 'Back', skills_path, class: 'btn btn-default' %>
+</div>
+</br>
+
+<% content_for :name do %>
+  Add Skills
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    $('.add_more').click(function(){
+      var element = $(".xyz").last().clone()
+      element.find('.text-field-cls').val('')
+      $(".field").append(element).show()
+     });
+
+   });
+  $(document).on('click', '.remove-field', function(){
+    if($('.text-field-cls').length <= 1){
+      alert("Can't remove.");
+    }else{
+      $(this).closest('.xyz').remove()
+     }
+  });
+ </script>

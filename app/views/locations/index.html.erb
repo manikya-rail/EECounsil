@@ -1,0 +1,25 @@
+<div class="map-container">
+  <div id="map"></div>
+</div>
+<% content_for :name do %>
+ User Locations
+<% end %>
+
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+	markers = handler.addMarkers(<%=raw @hash.to_json %>);
+	handler.bounds.extendWith(markers);
+	handler.fitMapToBounds();
+	 // Create a OverlappingMarkerSpiderfier instance
+  google.maps.event.addListenerOnce(handler.getMap(), 'idle', function(){
+	  var oms = new OverlappingMarkerSpiderfier(handler.getMap(), {
+	    keepSpiderfied: true
+	  });
+	  // Track each marker with OMS
+	  _.each(markers, function(marker) {
+	    oms.addMarker(marker.getServiceObject());
+	  });
+	});
+})
+</script>

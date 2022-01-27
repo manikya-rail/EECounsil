@@ -1,0 +1,85 @@
+{
+  "controlNumber": "000000001",
+  "tradingPartnerServiceId=": "19",
+  "submitter": {
+    "organizationName": "happy doctors group",
+    "contactInformation": {
+      "name": "Johnone Doeone",
+      "phoneNumber": "0000000000"
+    }
+  },
+  "receiver": {
+    "organizationName": "happy doctors group"
+  },
+  "subscriber": {
+    "memberId": "0000000000",
+    "paymentResponsibilityLevelCode": "P",
+    "firstName": "janeone",
+    "lastName": "doetwo",
+    "gender": "F",
+    "dateOfBirth": "18800102",
+    "policyNumber": "00000",
+    "address": {
+      "address1": "000 address1",
+      "city": "city1",
+      "state": "wa",
+      "postalCode": "981010000"
+    }
+  },
+  "providers": [
+    {
+      "providerType": "BillingProvider",
+      "npi": "1760854442",
+      "employerId": "00000",
+      "organizationName": "happy doctors group",
+      "address": {
+        "address1": "000 address1",
+        "city": "city1",
+        "state": "wa",
+        "postalCode": "981010000"
+      },
+      "contactInformation": {
+        "name": "Johnone Doeone",
+        "phoneNumber": "0000000000"
+      }
+    }
+  ],
+  "claimInformation": {
+    "claimFilingCode": "HM",
+    "patientControlNumber": "00001",
+    "claimChargeAmount": "5",
+    "placeOfServiceCode": "16",
+    "claimFrequencyCode": "1",
+    "signatureIndicator": "Y",
+    "planParticipationCode": "B",
+    "benefitsAssignmentCertificationIndicator": "Y",
+    "releaseInformationCode": "Y",
+    "healthCareCodeInformation": [
+      {
+        "diagnosisTypeCode": "BK",
+        "diagnosisCode": "496"
+      },
+      {
+        "diagnosisTypeCode": "BF",
+        "diagnosisCode": "25000"
+      }
+    ],
+    "serviceLines": [
+      {
+        "serviceDate": "20201115",
+        "professionalService": {
+          "procedureIdentifier": "HC",
+          "lineItemChargeAmount": "5",
+          "procedureCode": "90834",
+          "measurementUnit": "MJ",
+          "serviceUnitCount": "1",
+          "compositeDiagnosisCodePointers": {
+            "diagnosisCodePointers": [
+              "1"
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

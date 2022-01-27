@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="add_buttons">
+		<%= link_to " Add New Questionnaire", new_questionnaire_path, class: "btn btn-success" %><br><br>
+	</div>
+	<hr>
+	<h3>Questionnaire Lists</h3>
+	<ol>
+	  <% @questionnaire.each do |questionnaire|%>
+	    <li type='1'>
+	      <%= questionnaire.question.html_safe %>
+	      <%= link_to 'Edit', edit_questionnaire_path(questionnaire.id) ,class: "btn btn-primary" %>
+	      <%= link_to 'Delete', questionnaire_path(questionnaire.id), class: "btn btn-danger", method: :delete %>
+
+	    </li></br>
+	  <% end %>
+	</ol>
+	<% content_for :name do %>
+	  Questionnaires
+	<% end %>
+	<%= link_to 'Back', root_path, class: 'btn btn-default' %>
+</div>

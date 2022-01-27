@@ -1,0 +1,73 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+<%# if resource.errors.any? %>
+    <%# resource.errors.full_messages.each do |message| %>
+      <!-- <li><%#= message %></li> -->
+    <%# end %>
+<%# end %>
+  <div class="inr-midle-wrp">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="registr-inr">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <a href="#"><%= image_tag "panel-logo.png", class: "img-responsive" %></a>
+              </div>
+              <div class="panel-body">
+                <div class="panrl-body-inr">
+                  <div class="panel-bx-login">
+                    <div class="form_group" style="width: 30%;">
+                      <%= f.hidden_field :added_by, value: nil %>
+                    </div>
+
+                    <div class="form_group" style="width: 30%;">
+                      <%= f.hidden_field :role_name, value: params[:role_name] %>
+                    </div>
+
+                    <div class="form_group" style="width: 30%;">
+                      <%= f.hidden_field :status, value: true %>
+                    </div>
+
+                    <% if params[:role_name] == 'patient' %>
+                      <div class="form_group" style="width: 30%;">
+                        <%= f.hidden_field :approved, value: true %>
+                      </div>
+                    <% else %>
+                      <div class="form_group" style="width: 30%;">
+                        <%= f.hidden_field :approved, value: false %>
+                      </div>
+                    <% end %>
+                    <%= render 'users/registrations/form', f: f %>
+
+                    <div class="custom-checkbox text-center">
+                      <label class="check-custom">
+                        <input type="checkbox">
+                        <span>I agree for <%= link_to "Terms of Use" %> and <%= link_to "Privacy Policy" %></span>
+                      </label>
+                    </div>
+
+                    <div class="submit-btn text-center">
+                      <%= f.submit "Sign up" ,class: "btn btn-default btn-blue"%>
+                    </div>
+                    <div class="botom-info text-center">
+                      or <%= link_to 'Login', new_user_session_path%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :name do %>
+  Register
+<% end %>
+<% content_for :sub_text do %>
+  Don't Have An Account Sign Up Here
+<% end %>
+

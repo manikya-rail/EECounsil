@@ -1,0 +1,18 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-dtl-rgt">
+          <div class="blg-dtl-img">
+            <p>
+              <strong>Title:</strong>
+              <%= @intervention.title %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_intervention_path(@intervention), class: "btn btn-default btn-blue"%>
+    <%= link_to 'Back', interventions_path, class: 'btn btn-default'%>
+  </div>
+</div>

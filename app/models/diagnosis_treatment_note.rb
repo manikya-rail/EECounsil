@@ -1,0 +1,2 @@
+class DiagnosisTreatmentNote < ApplicationRecord
+end

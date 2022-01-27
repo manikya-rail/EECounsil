@@ -1,0 +1,32 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-lst-rgtbar">
+          <div class="bog-rgt-list">
+            <ul class="list-unstyled">
+              <li>
+                <%= link_to 'Add New Blog', new_blog_path, class: "btn btn-success" %>
+              </li>
+              <li><h3>Blogs List</h3></li>
+              <% @blogs.each do |blog|%>
+              <li>
+                <h4><%= blog.title %></h4>
+                <div class="blg-lst-img"><%= image_tag blog.media.item.url, class: "img-responsive"%></div>
+                <p><%= truncate(blog.description, length: 300, escape: false) %></p>
+                <%= link_to 'View' , blog_path(blog), class: "btn btn-primary"%>
+                <%= link_to 'delete', blog_path(blog), class: "btn btn-danger",
+                      method: :delete, data: {confirm: "Are you sure?"} %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+  </div>
+</div>
+<% content_for :name do %>
+  Blogs
+<% end %>

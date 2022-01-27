@@ -1,0 +1,10 @@
+<div class='nested-fields'>
+  <div class="field">
+		<% f.object.media.new %>
+    <%= f.fields_for :media do |i| %>
+      <%= i.label :select_file %>:<br/>
+      <%= i.file_field :item %>
+    <% end %>
+  </div><br>
+  <%= link_to_remove_association "Remove Option", f %>
+</div>

@@ -1,0 +1,88 @@
+<div class="frnt-dash-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="frnt-dash-inr">
+          <div class="dash-profile">
+            <div class="profile-top clearfix">
+              <div class="profile-top-inr">
+                <div class="row row-flex">
+                  <div class="col-md-8 col-sm-5 col-xs-12">
+                    <div class="profile-top-lft">
+                      <div class="top-lft-lft">
+                        <div class="profile-pic">
+                          <div class="profile-pic-inr">
+                            <% if @user.profile_picture.present? && @user.profile_picture.item.url.present? %>
+                              <%= image_tag(@user.profile_picture&.item&.url, id: "img_prev")%>
+                            <% else %>
+                              <%= image_tag("defaultprofile.png", id: "img_prev")%>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="top-lft-rgt">
+                        <h3><%= @user.first_name.capitalize%> <%= @user.last_name.capitalize %></h3>
+                        <div class="usr-spec"><%= check_role(resource).capitalize %></div>
+                          <div class="save-btn">
+                            <%= link_to ' Edit Profile', edit_profile_path, class: "fa fa-edit btn btn-default btn-blue" %>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-7 col-xs-12">
+                    <div class="profile-top-rgt">
+                      <div class="persn-info">
+                        <ul class="list-unstyled">
+                          <li>
+                            <div class="per-inf-lft">First Name:</div>
+                            <div class="per-inf-rgt"><span><%= @user.first_name %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Last Name:</div>
+                            <div class="per-inf-rgt"><span><%= @user.last_name %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Email:</div>
+                            <div class="per-inf-rgt"><span><%= @user.email %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">DOB:</div>
+                            <div class="per-inf-rgt"><span><%= @user.birth_date %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Gender:</div>
+                            <div class="per-inf-rgt"><span><%= @user.gender.capitalize %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Country:</div>
+                            <div class="per-inf-rgt"><span><%= @user.address.country.capitalize %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Zip Code:</div>
+                            <div class="per-inf-rgt"><span><%= @user.address.zip %></span></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% if @user.introduction_video.present? && @user.introduction_video.item.present? %>
+              <div class="col-md-5">
+                <h4>Video:</h4>
+                <video loop muted autoplay class="fullscreen-bg_video" style="width: 100%;">
+                  <source src="<%= @user.introduction_video.item.url %>" type="video/mp4">
+                </video>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :name do %>
+  My Profile
+<% end %>

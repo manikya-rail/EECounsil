@@ -1,0 +1,23 @@
+<div class='container' style="width: 355px">
+  <%= form_for @category, url: { :action => "update" } do |f| %>
+    <div style="text-align: center; font-family: none; font-size: 25px">
+      <%= f.label :Edit_category%>
+    </div>
+    <div class='form_field field'>
+      <div class='row xyz'>
+        <div style="text-align: center; width: 90%;">
+          <%= f.text_field :name, class: 'text-field-cls'%>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin: 8px" >
+      <%= f.submit "Update", class: 'btn add-skill-button'%>
+    </div>
+   <% end %>
+  <%= link_to 'Back', categories_path, class: 'btn btn-default' %>
+</div>
+</br>
+
+<% content_for :name do %>
+  Edit Category
+<% end %>

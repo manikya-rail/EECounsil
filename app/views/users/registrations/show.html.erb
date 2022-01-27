@@ -1,0 +1,211 @@
+<div class="frnt-dash-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="frnt-dash-inr">
+          <div class="dash-profile">
+            <div class="profile-top clearfix">
+              <div class="profile-top-inr">
+                <div class="row row-flex">
+                  <div class="col-md-8 col-sm-5 col-xs-12">
+                    <div class="profile-top-lft">
+                      <div class="top-lft-lft">
+                        <div class="profile-pic">
+                          <div class="profile-pic-inr">
+                            <% if @user.profile_picture.present? && @user.profile_picture.item.url.present? %>
+                              <%= image_tag(@user.profile_picture&.item&.url, id: "img_prev")%>
+                            <% else %>
+                              <%= image_tag("defaultprofile.png", id: "img_prev")%>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="top-lft-rgt">
+                        <h3><%= @user.first_name.capitalize%> <%= @user.last_name.capitalize %></h3>
+                        <div class="usr-spec"><%= resource.roles.first.name.capitalize %></div>
+                          <div class="save-btn">
+                            <%= link_to ' Edit Profile', edit_user_registration_path, class: "fa fa-edit btn btn-default btn-blue" %>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-7 col-xs-12">
+                    <div class="profile-top-rgt">
+                      <div class="persn-info">
+                        <ul class="list-unstyled">
+                          <li>
+                            <div class="per-inf-lft">First Name:</div>
+                            <div class="per-inf-rgt"><span><%= @user.first_name %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Last Name:</div>
+                            <div class="per-inf-rgt"><span><%= @user.last_name %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Email:</div>
+                            <div class="per-inf-rgt"><span><%= @user.email %></span></div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">DOB:</div>
+                            <div class="per-inf-rgt"><span><%= @user.birth_date %></span></div>
+                          </li>
+
+                          <li>
+                            <div class="per-inf-lft">Gender:</div>
+                            <div class="per-inf-rgt"><span><%= @user.gender.capitalize %></span></div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- <div class="social-info">
+                        <ul class="list-inline">
+                          <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                          <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+                          <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+                          <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                          <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+                        </ul>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           <!--  <div class="profile-info clearfix">
+              <div class="change-pass">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h4>Change Password:</h4>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Old Password</label>
+                          <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>New Password</label>
+                          <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Confirm password</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                <div class="col-xs-12">
+                  <div class="btn-save-update">
+                    <a href="#" class="btn btn-default btn-blue">save</a>
+                  </div>
+                </div>
+              </div>                </div>
+                <div class="col-md-5">
+                  <h4>Video:</h4>
+                <video loop muted autoplay class="fullscreen-bg_video" style="width: 100%;">
+                  <source src="videos/client-video.mp4" type="video/mp4">
+                </video>
+                </div>
+              </div>
+            </div>
+            <div class="plan-info">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4>Plan Info:</h4>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Plan Name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Status</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Billing Cycle</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-xs-12">
+                  <div class="btn-save-update">
+                    <a href="#" class="btn btn-default btn-blue">Upgrade</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="apnt-info">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4>Appointment Alert:</h4>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Selecting the alert interval alerts for upcoming appointments.</label>
+
+                    <div class="apnt-info-check">
+                      <ul class="list-inline">
+                        <li>
+                          <label class="check-custom">
+                            <input type="checkbox">
+                            <span>2 min</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="check-custom">
+                            <input type="checkbox">
+                            <span>5 min</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="check-custom">
+                            <input type="checkbox">
+                            <span>10 min</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="check-custom">
+                            <input type="checkbox">
+                            <span>15 min</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="check-custom">
+                            <input type="checkbox">
+                            <span>30 min</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-xs-12">
+                  <div class="btn-save-update">
+                    <a href="#" class="btn btn-default btn-blue">Upgrade</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<% content_for :name do %>
+  My Profile
+<% end %>

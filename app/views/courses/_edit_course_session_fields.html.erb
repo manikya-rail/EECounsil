@@ -1,0 +1,42 @@
+<div class='nested-fields well well_div'>
+  <div class="well pagediv"><label> Page <%= @i%></label></div>
+  <% j = 1%>
+  <%= f.fields_for :media do |i| %>
+  <% if i.object.item.content_type.present? %>
+    <div class="document">
+    <% if i.object.item.content_type.split('/')[0] == "image" %>
+      <b><%= @i %>.<%= j %></b>&nbsp;<%= image_tag(i.object.item.url, size: "90x70")%>
+      <% elsif  i.object.item.content_type.split('/')[1] == "pdf" %>
+        <b><%= @i %>.<%= j %></b>&nbsp;<a href="<%= i.object.item.url %>" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><%= i.object.item_was %></a>
+      <% elsif  i.object.item.content_type.split('/')[0] == "video"%>
+        <b><%= @i %>.<%= j %></b>&nbsp;<a href="javascript:void(0);" onclick= 'open_video("<%= i.object.item.url %>")' ><i class="fa fa-file-video-o" aria-hidden="true"></i><%= i.object.item_was %></a></li>
+      <% elsif  i.object.item.content_type.split('/')[0] == "audio" %>
+        <b><%= @i %>.<%= j %></b>&nbsp;<a href="javascript:void(0);" onclick= 'open_audio("<%= i.object.item.url %>")' ><i class="fa fa-file-audio-o" aria-hidden="true"></i><%= i.object.item_was %></a></li>
+      <% elsif i.object.item.content_type.split('/')[0] == "application" %>
+        <b><%= @i %>.<%= j %></b>&nbsp;<a href="<%= i.object.item.url %>"><i class="fa fa-file-word-o" aria-hidden="true"></i><%= i.object.item_was %></a>
+      <% end%>
+      </div>
+      <% j = j+1%>
+    <% end %>
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="frm-grp-inr">
+          <%= i.label :update_file %>:<br/>
+          <div class="row">
+            <div class="col-md-11">
+            <%= i.file_field :item, class: 'form-control' %>
+            </div>
+            <div class='col-md-1 closebtnDiv'>
+              <a href='javascript:void(0)', data-id="<%= i.object.id %>" class= 'remove-field btn btn-danger fa fa-close closebtn', onclick='check_field_edit(event)'></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><br>
+  <% end %>
+  <%= link_to 'Add more files', 'javascript:void(0)', class: 'btn btn-primary add-more-btn-edit', onclick: "addMoreButtonEdit(event)" %>
+  <div>
+    <%= link_to_remove_association "Remove course page", f , class: 'btn btn-danger' %>
+  </div><br/>
+</div>
+<%= render 'model' %>

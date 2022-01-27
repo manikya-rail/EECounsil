@@ -1,0 +1,39 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-dtl-rgt">
+          <div class="blg-dtl-img">
+            <p>
+              <strong>Name:</strong>
+              <%= @payment_plan.name %>
+            </p>
+
+            <p>
+              <strong>Features:</strong>
+              <%= @payment_plan.plan_features.map(&:feature_names).join(', ') %>
+            </p>
+
+            <p>
+              <strong>Amount:</strong>
+              <%= @payment_plan.amount %>
+            </p>
+
+            <p>
+              <strong>Currency:</strong>
+              <%= @payment_plan.currency %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_plan_path(@payment_plan), class: "btn btn-default btn-blue"%>
+    <%= link_to 'Back', plans_path, class: 'btn btn-default'%>
+  </div>
+</div>
+
+<!--<p>
+  <strong>User:</strong>
+  <%= @payment_plan.user %>
+</p>-->
+

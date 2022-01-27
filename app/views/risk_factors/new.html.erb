@@ -1,0 +1,27 @@
+<div class="inr-midle-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="registr-inr">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <a href="#"><%#= image_tag "panel-logo.png", class: "img-responsive" %></a>
+            </div>
+            <div class="panel-body">
+              <div class="panrl-body-inr">
+                <div class="panel-bx-login">
+                  <%= form_for @risk_factor, url: risk_factors_path do |f| %>
+                    <%= render partial: 'form', locals: {f: f}%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :name do %>
+  Add Risk Factor
+<% end %>

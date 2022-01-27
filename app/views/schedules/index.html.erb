@@ -1,0 +1,66 @@
+<div class="container" style="margin-bottom: 25px;">
+ <div style="margin-bottom: 10px;">
+    <%= collection_select(:patient, :patient_id, Patient.all.where(deleted_at: nil), :id, :first_name,{prompt: "Search by Patient"}, {class: 'js-example-tags search_by_patient'}) %>
+    <%= collection_select(:therapist, :therapist_id, Therapist.all.where(deleted_at: nil), :id, :first_name,{prompt: "Search by Therapist"}, {class: 'js-example-tags search_by_therapist'}) %>
+  </div>
+  <div class='calendar'>
+  </div>
+  <div id="calendarModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+          <h4 id="modalTitle" class="modal-title" style="font-family: serif; font-style: italic; text-align: center; font-size: 30px;"></h4>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <!-- <div id="modalStatusBooked"> -->
+
+              <%#= image_tag "booked.png", class: "img-responsive logo-fixed" %>
+            <!-- </div> -->
+            <!-- <div id="modalStatusCancelled"> -->
+
+              <%#= image_tag "cancelled.jpeg", class: "img-responsive logo-fixed" %>
+            <!-- </div> -->
+          </div>
+          <div class="col-md-4">
+            <div id="modalBody" class="modal-body" style="text-align: center; font-weight: bold; color: red">
+            </div>
+            <div id="modalTiming" class="modal-body" style="text-align: center; font-weight: bold; color: red">
+            </div>
+          </div>
+        </div>
+        <div class="row modal-body">
+          <div class="col-md-4" style="text-align: center;">
+            <label style="padding: 10px;">Therapist Name:</label>
+            <div id="therapist" class="modal-body" style="font-size: 20; font-weight: bold">
+            </div>
+          </div>
+          <div class="col-md-4" style="text-align: center;">
+            <div style="padding-top: 50px"><-------------------></div >
+          </div>
+          <div class="col-md-4" style="text-align: center;">
+            <label style="padding: 10px;">Patient Name:</label>
+            <div id="patient" class="modal-body" style="font-size: 20; font-weight: bold">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right: 10px;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :name do %>
+  Schedules
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".js-example-tags").select2({
+    width: '17%',
+  });
+});
+</script>

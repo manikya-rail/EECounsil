@@ -1,0 +1,18 @@
+<%if @promo_code.promo_value.to_i == 15%>
+  <h4>Here’s an offer we hope will prompt you to continue with eCounsel: Sign Up Now and we’ll give you an EXTRA 15% Discount on your first (4) Months</h4>
+
+  <h2><a href="https://ecounsel.com">SIGN UP NOW</a></h2>
+<%elsif @promo_code.promo_value.to_i == 20 %>
+  <h4>Here’s an offer we hope will prompt you to continue with eCounsel: Sign Up Now and we’ll give you an EXTRA 20% Discount on your first (4) Months</h4>
+
+  <h2><a href="https://ecounsel.com">SIGN UP NOW</a></h2>
+<%elsif @promo_code.promo_value.to_i == 25 %>
+  <h4>We want to keep you with eCounsel. Here’s an offer we hope will prompt you to continue with eCounsel: Sign Up Now and we’ll give you an EXTRA 25% Discount on your first (4) Months”</h4>
+
+  <h2><a href="https://ecounsel.com">SIGN UP NOW</a></h2>
+<%elsif @promo_code.promo_value.to_i == 30 %>
+  <h4>We want to keep you with eCounsel. Here’s an offer we hope will prompt you to continue with eCounsel: Sign Up Now and we’ll give you an EXTRA 30% Discount on your first (4) Months”</h4>
+  <h2><a href="https://ecounsel.com">SIGN UP NOW</a></h2>
+<%end%>
+<h3>DO NOT REPLY</h3>
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">

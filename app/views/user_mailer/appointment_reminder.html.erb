@@ -1,0 +1,21 @@
+<h3>Hi, <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h3>
+
+<% @role = @user.roles.first.name%>
+<%alert_time = distance_of_time_in_words(0, @other.schedule_alert_time.minutes)%>
+<p>This notification is a reminder that you have an appointment with <%= @other.full_name %> at <%= @schedule.starts_at.to_datetime.strftime('%I:%M %p') %>. </p>
+
+<%if @role == 'patient'%>
+  <p> Please login to your account just ahead of your scheduled appointment by using the link below and your therapist will invite you to the video conference </p>
+<%end%>
+
+<p>Note: your computer may prompt you to click to allow for video and microphone use </p>
+
+<a href="https://ecounsel.com">https://ecounsel.com
+</a>
+
+<h3>DO NOT REPLY</h3>
+
+<br/>
+<br/>
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">
+

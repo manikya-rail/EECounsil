@@ -1,0 +1,22 @@
+<% if @risk_factor.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @risk_factor.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :title, autofocus: true, autocomplete: "title",
+        class: 'form-control', placeholder: "title" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="submit-btn text-center">
+  <%= f.submit  @risk_factor.new_record? ? 'Add Title' : 'Update Title' ,class: "btn btn-default btn-blue"%>
+</div>

@@ -1,0 +1,8 @@
+<div style="width:100%;float: left;padding: 0 30px 30px 30px;box-sizing: border-box;cursor: pointer;">
+  <p>You have received a new message from <%= @sender.email%></p>
+  <%= link_to 'Read', "#{APP_CONFIG['APP_URL']}", style: "background: #428503;border: 0px;padding: 10px 30px;border-radius: 31px;color: #fff;font-size: 20px;margin-bottom: 5px;cursor: pointer; text-decoration: none;" %>
+</div>
+
+<h3>DO NOT REPLY</h3>
+
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">

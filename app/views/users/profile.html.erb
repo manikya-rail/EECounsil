@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3" style="text-align: left">
+      <ul style="list-style: none; font-size: 20px; font-family: Georgia;">
+        <li>
+          <strong>First Name:</strong>
+          <%= @user.first_name %>
+        </li>
+        <li>
+          <strong>Last Name:</strong>
+          <%= @user.last_name %>
+        </li>
+        <li>
+          <strong>Email:</strong>
+          <%= @user.email %>
+        </li>
+        <li>
+          <strong>Birthdate:</strong>
+          <%= @user.birth_date %>
+        </li>
+        <li>
+          <strong>Gender:</strong>
+          <%= @user.gender %>
+        </li>
+      </ul>
+    </div>
+    <%= link_to "Edit", edit_profile_path(id: @user.id) %>
+    <%= link_to "Delete", delete_user_path(@user), confirm: 'Are you sure you want to delete the account?', method: :delete %>
+
+  </div>
+</div>
+

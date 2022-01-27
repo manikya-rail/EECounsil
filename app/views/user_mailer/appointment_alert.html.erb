@@ -1,0 +1,11 @@
+<h3>Hello, <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h3>
+
+<h3>Welcome to Ecounsel</h3>
+
+<p>This is a notification mail to notify that your scheduled appointment on date <%= @schedule.schedule_date.to_date %> with <%= @other.first_name.capitalize %> <%= @other.last_name.capitalize %> from  <%= @schedule.starts_at.to_s(:time) %> to <%= @schedule.ends_at.to_s(:time) %>. Its going to start in <%= @user.schedule_alert_time %> mins.</p>
+
+<p>To continue with the booked schedule click on link below.</p>
+<a href="<%= APP_CONFIG['HOST_ENDPOINT'] %>/<%= @user.roles.first.name %>/scheduler">Click here</a>
+
+<h3>DO NOT REPLY</h3>
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">

@@ -1,0 +1,14 @@
+<%= form_for @user, url: {action: "update_profile"} do |f| %>
+
+  <%#= link_to 'Delete Profile', user_registration_path(@user.id), method: :delete, class: "fa fa-edit btn btn-default btn-blue" %>
+	<div id="error_explanation" align="center">
+	  <% @user.errors.full_messages.each do |message| %>
+	    <p><%= message %></p>
+	  <% end %>
+	</div>
+  <%= render 'users/registrations/edit_partial', f: f %>
+<% end %>
+
+<% content_for :name do %>
+  <%= @user.first_name.capitalize %>'s Profile
+<% end %>

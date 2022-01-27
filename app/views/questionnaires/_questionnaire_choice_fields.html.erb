@@ -1,0 +1,19 @@
+<div class='nested-fields'>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :option %>:
+        <%= f.text_field :option, class: "form-control", placeholder: "Option"%>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :Select_skill %>:<br/>
+        <%= f.select(:skill, options_from_collection_for_select(Skill.all, "name", "name"), prompt: "Select Skill", class: 'form control', style: 'width: 100%;')%>
+      </div>
+    </div>
+  </div>
+  <%= link_to_remove_association "remove task", f ,class: "btn btn-danger" %>
+</div><br/>

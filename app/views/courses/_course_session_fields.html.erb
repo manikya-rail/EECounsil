@@ -1,0 +1,23 @@
+<div class='nested-fields well well_div'>
+  <div class="well pagediv"><label> New Page </label></div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <% f.object.media.new %>
+        <%= f.fields_for :media do |i| %>
+          <%= i.label :select_file %>:<br/>
+        <div class="row">
+          <div><b>1.</b></div>
+          <div class="col-md-11">
+          <%= i.file_field :item, class: "form-control"%>
+          </div>
+          <div class='col-md-1 closebtnDiv'>
+            <a href='javascript:void(0)', class= 'remove-field btn btn-danger fa fa-close closebtn', onclick='check_field_new(event)'></a></div>
+          </div>
+          <%= link_to 'Add more files', 'javascript:void(0)', class: 'btn btn-primary', onclick: "addMoreButton(event)" %>
+        <% end %>
+      </div><br/>
+    </div>
+  </div>
+  <%= link_to_remove_association "Remove course page", f, class: 'btn btn-danger' %>
+</div><br/>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  available_day: one
+  start_time: 2019-11-28 15:11:20
+  end_time: 2019-11-28 15:11:20
+
+two:
+  available_day: two
+  start_time: 2019-11-28 15:11:20
+  end_time: 2019-11-28 15:11:20

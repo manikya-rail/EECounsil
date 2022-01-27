@@ -1,0 +1,79 @@
+<div class="abt-us-wrp data-table_">
+  <div class="container">
+    <div>
+      <Span class='alert alert-info'>
+        This therapist has open appointments,
+        First assign his appointments to some other therapist than delete the therapist
+      </Span>
+    </div>
+    <div>
+      <h3><strong>Open Appointments</strong></h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Schedules</th>
+            <th>Assign to</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @schedules.each do |schedule| %>
+          <tr>
+            <td><%=schedule.schedule_date.to_date%></td>
+            <td><%=select_tag "Therapist", options_for_select( skill(schedule).collect {|p| [ p.email, p.id ] }), prompt: 'Select a therapist', id: "therapist_#{schedule.id}"%></td>
+            <td><button class="btn btn-success" id="schedule_<%=schedule.id%>" onclick='remove_button(this,
+            {
+              id : "<%=schedule.id%>",
+              therapist_id : "<%= schedule.therapist_id%>",
+            }
+            );'>Assign</button></td>
+          </tr>
+
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+
+ function remove_button(e, schedule){
+  if($("#therapist_"+ schedule.id).val()){
+
+    $.ajax({
+      url: "/schedules",
+      type: "post",
+      data: { data_value: JSON.stringify({
+          sch_id: schedule.id,
+          therapist_id: $("#therapist_"+ schedule.id).val(),
+        }) },
+      success: function(data) {
+        if(data.error){
+           alert(data.error.error[0]);
+           return false
+        }else{
+          $(e).remove();
+          if($('.btn-success').length == 0){
+            $.ajax({
+            url: "/users/"+schedule.therapist_id+"/delete_profile",
+            type: "get",
+            data: "",
+            success: function(data) {
+              window.location = "/";
+            },
+            error: function(data) {
+            }
+            });
+          }
+        }
+      },
+      error: function(data) {
+        alert(data);
+      }
+    });
+ }else{
+  alert("select a therapist");
+ }
+}
+</script>

@@ -1,0 +1,68 @@
+<% if @promo_code.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @promo_code.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+<% end %>
+<% if @promo_code.new_record?%>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <div class="frm-grp-inr">
+          <%= f.select :promo_type,PromoCode.promo_types.keys, autofocus: true, autocomplete: "Name",
+          class: 'form-control', placeholder: "Name of plan" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <div class="frm-grp-inr">
+          <%= f.number_field :promo_value, autofocus: true, autocomplete: "value",
+          class: 'form-control', placeholder: "Value" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<div class="row">
+  <div class="col-md-4" align="center">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+      <%= f.text_field :code,
+        class: 'form-control', placeholder: "Code"  %>
+      </div>
+    </div>
+  </div>
+  <%if @promo_code.new_record?%>
+    <div class="col-md-4" align="center">
+      <div class="form-group">
+        <div class="frm-grp-inr">
+        <%= f.number_field :duration_in_months,
+          class: 'form-control', placeholder: "Duration in Months"  %>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<div class="submit-btn text-center">
+  <%= f.submit  @promo_code.new_record? ? 'Add Promo' : 'Update Promo' ,class: "btn btn-default btn-blue"%>
+</div>
+<%= link_to 'Back', promo_codes_path %>
+<style type="text/css">
+	.registr-inr .frm-grp-inr select{
+		width: 100%;
+	}
+</style>
+
+
+
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+      placeholder: "   Select Your Skills"
+    });
+});
+</script>

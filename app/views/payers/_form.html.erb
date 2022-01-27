@@ -1,0 +1,33 @@
+<% if @payer.errors.any? %>
+  <div id="error_explanation" align="center">
+    <% @payer.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :payer_id, autofocus: true, autocomplete: "payer_id",
+                         class: 'form-control', placeholder: "payer_id" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :payer_name, autofocus: true, autocomplete: "payer_name",
+                         class: 'form-control', placeholder: "payer_name" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="submit-btn text-center">
+  <%= f.submit  @payer.new_record? ? 'Add Payer' : 'Update Payer' ,class: "btn btn-default btn-blue"%>
+</div>

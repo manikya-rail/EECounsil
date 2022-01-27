@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="add_buttons">
+    <%= link_to 'Add New Course', new_course_path, class: "btn btn-success"  %>
+  </div>
+  <hr>
+<h3>Existing Courses List:</h3>
+  <% i = 1 %>
+  <% @courses.each do |course| %>
+    <div class = "well well-sm">
+      <%= link_to i.to_s+". "+course[:name], show_course_course_path(course[:id]), class: "col-sm-10" %>
+      <%= link_to 'View Course' ,show_course_course_path(course[:id]), class: 'btn btn-primary' %>
+    </div>
+   <% i = i + 1%>
+  <% end %>
+  <%= link_to 'Back' , root_path, class: 'btn btn-default' %>
+</div>
+
+<% content_for :name do %>
+  Courses
+<% end %>

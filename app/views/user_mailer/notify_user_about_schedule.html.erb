@@ -1,0 +1,65 @@
+<h3>Dear <%= @mail_user.first_name.capitalize %> <%= @mail_user.last_name.capitalize %>,</h3>
+<!--<h3>Welcome to Ecounsel</h3>-->
+<!--<p> This is a notification mail to notify you about your appointment.</p>-->
+
+<% @role = @mail_user.roles.first.name
+	@other_user = (@mail_user.roles.first.name == @user.roles.first.name) ? @other_user : @user
+%>
+
+<%@schedule_date = @schedule.schedule_date.to_date%>
+
+<% if @schedule.status == 'scheduled' %>
+	<% if @role == 'patient' &&  @state == 'new' %>
+		<h3>DO NOT REPLY</h3>
+		<p>You have successfully requested the appointment on <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %>.
+		Your appointment is waiting for confirmation with the <%= @other_user.first_name %> <%= @other_user.last_name %>. When the appointment is approved you will be notified through the mail.</p>
+	<% elsif @role == 'patient' &&  @state == 'update' %>
+		<h3>DO NOT REPLY</h3>
+		<p>You have successfully updated your appointment on <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %>.
+		Your appointment is waiting for confirmation with the <%= @other_user.first_name %> <%= @other_user.last_name %>.When the appointment is approved you will be notified through the mail.</p>
+	<% elsif @role == 'therapist' %>
+		<p>This message is to confirm that <%= @user.full_name%> has scheduled an appointment with you for <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %> at <%= @schedule.starts_at.to_datetime.strftime('%I:%M %p') %>.
+			Click on the link below to accept or decline the appointment.</p>
+
+			<a href="<%= APP_CONFIG['HOST_ENDPOINT'] %>/<%= @role %>/scheduler?source=mail">Click here</a>
+
+			<p>Note: Just prior to the scheduled appointment, please login to your account at <a href="https://ecounsel.com">ecounsel.com</a>
+			You will initiate the video call by clicking on the Start Video Conference Tab. Your computer may prompt you to allow for video and microphone use</p>
+			<h3>DO NOT REPLY</h3>
+	<% end %>
+<% elsif @schedule.status == 'booked' %>
+	<% if @role == 'therapist' %>
+		<h3>DO NOT REPLY</h3>
+		<p>You have successfully approved the appointment on <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %> with <%= @other_user.full_name %>.</p>
+	<% else %>
+		<%if @schedule.scheduled_by == 'patient'%>
+			<p>This message is to confirm that <%= @other_user.full_name %> has confirmed an appointment with you for <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %> at <%= @schedule.starts_at.to_datetime.strftime('%I:%M %p') %>.</p>
+
+			<p>Please login to your account at <a href="https://ecounsel.com">ecounsel.com</a> just prior to the appointment. <%= @other_user.full_name %> will initiate the call and you may then click the green accept tab to begin your appointment </p>
+
+			<p>Note: your computer may prompt you to click to allow for video and microphone use</p>
+			<h3>DO NOT REPLY</h3>
+		<%else%>
+			<p>This message is to confirm that <%= @other_user.full_name %> has scheduled an appointment with you for <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %> at <%= @schedule.starts_at.to_datetime.strftime('%I:%M %p') %>.</p>
+
+			<p>Please login to your account at <a href="https://ecounsel.com">ecounsel.com</a> just prior to the appointment. <%= @other_user.full_name %> will initiate the call and you may then click the green accept tab to begin your appointment </p>
+
+			<p>Note: your computer may prompt you to click to allow for video and microphone use</p>
+			<h3>DO NOT REPLY</h3>
+		<%end%>
+	<% end %>
+<% elsif @schedule.status == 'canceled'%>
+		<h3>DO NOT REPLY</h3>
+		<p>Your appointment on date <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %> with <%= @other_user.full_name %> is canceled.</p>
+<% elsif @schedule.status == 'completed'%>
+		<h3>DO NOT REPLY</h3>
+		<p>Your appointment on date <%= @schedule_date.strftime("%A, %B #{@schedule_date.day.ordinalize}") %> with <%= @other_user.full_name %> is completed.</p>
+<% end %>
+
+
+
+
+
+
+
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">

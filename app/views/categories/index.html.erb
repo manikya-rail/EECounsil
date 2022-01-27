@@ -1,0 +1,50 @@
+<div class="data-table_">
+  <div class="container" style="width:700px;">
+    <div class="add_buttons">
+      <%= link_to 'Add New Categories', new_category_path, class: "btn btn-success" %>
+    </div><hr>
+    <h3>Category Lists</h3>
+    <table id="categories-datatable" class="table table-striped table-bordered" data-source="<%= categories_path(format: :json) %>">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th style="width: 10px"></th>
+          <th style="width: 10px"></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+  </div>
+</div>
+
+<% content_for :name do %>
+  Categories
+<% end %>
+
+<script>
+  jQuery(document).ready(function() {
+    $('#categories-datatable').dataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": $('#categories-datatable').data('source'),
+      "pagingType": "full_numbers",
+      "columns": [
+        {"data": "id"},
+        {"data": "name"},
+        {"orderable": false,
+          "mRender": function ( data, type, row ) {
+                        return '<a href=/categories/'+row.id+'/edit class="fa fa-edit edit_button" ></a>';
+                      }
+                },
+        {"orderable": false,
+          "mRender": function ( data, type, row ) {
+                        return '<a href=/categories/'+row.id+' class="fa fa-trash delete_button" data-method="delete" data-confirm="Are you sure?" data-remote="true" id="row_'+row.id+'"></a>';
+                      }
+                }
+        ],
+    });
+  });
+</script>

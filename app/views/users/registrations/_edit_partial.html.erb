@@ -1,0 +1,202 @@
+<div class="frnt-dash-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="frnt-dash-inr">
+          <div class="dash-edit-profile">
+            <div class="profile-top clearfix">
+              <div class="profile-top-inr">
+                <div class="row row-flex">
+                  <div class="col-md-8 col-sm-5 col-xs-12">
+                    <div class="profile-top-lft">
+                      <div class="top-lft-lft">
+                        <div class="profile-pic">
+                           <div class="profile-pic-inr">
+                            <% if @user.profile_picture.present? && @user.profile_picture.item.url.present? %>
+                              <%= image_tag(@user.profile_picture&.item&.url, id: "img_prev")%>
+                            <% else %>
+                              <%= image_tag("defaultprofile.png", id: "img_prev")%>
+                            <% end %>
+                          </div>
+                          <div class="edit-pic">
+                            <label class="btn fa fa-edit">
+                              <%= f.fields_for :profile_picture do |i|%>
+                                <%= i.hidden_field :media_type , value: UserMedium.media_types.keys.first %>
+                                <%= i.file_field :item, :onchange => "readURL(this)", class: "hide" %>
+                              <% end %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="top-lft-rgt">
+                        <h3><%= resource.first_name.capitalize%> <%= resource.last_name.capitalize %></h3>
+                        <div class="usr-spec"><%= resource.roles.first.name.capitalize %></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-7 col-xs-12">
+                    <div class="profile-top-rgt">
+                      <div class="persn-info">
+                        <ul class="list-unstyled">
+                          <li>
+                            <div class="per-inf-lft">First Name:</div>
+                            <div class="per-inf-rgt">
+                              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name",
+                              class: 'form-control' %>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Last Name:</div>
+                            <div class="per-inf-rgt">
+                              <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name",
+                              class: 'form-control' %>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">DOB:</div>
+                            <div class="per-inf-rgt">
+                              <%=f.text_field :birth_date, "data-provide" => 'datepicker', autofocus: true,
+                                autocomplete: "bith_date", class: 'form-control' %>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Email:</div>
+                            <div class="per-inf-rgt">
+                              <%= f.email_field :email,:readonly => true, class: 'form-control'%>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Phone Number:</div>
+                            <div class="per-inf-rgt">
+                              <%= f.text_field :phone_number, class: 'form-control'%>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="per-inf-lft">Gender:</div>
+                            <div class="per-inf-rgt">
+                              <%= f.select(:gender, options_for_select([['Male','male'],['Female','female']],
+                              @user.gender), {:prompt => "Gender"}, class: 'form-control' ) %>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="profile-info clearfix">
+              <%= f.fields_for :address do |address_form| %>
+                <div class="change-pass">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h4>Address:</h4>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <div class="registr-inr">
+                          <div class="frm-grp-inr">
+                            <label>Country</label>
+                              <%= address_form.select :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] }, selected: @user.address.country), {}, { class: "address_field", id: "country-picker"} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Street Address</label>
+                        <%= address_form.text_field :street_address, autofocus: true, id: 'geo-input' , class: "form-control"%>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Zip</label>
+                        <%=  address_form.text_field :zip, autofocus: true, id: "zipcode", class: "form-control" %>
+                      </div>
+                    </div>
+                  </div>
+                <%= address_form.hidden_field :latitude, { id: "latitude" } %>
+                <%= address_form.hidden_field :longitude, { id: "longitude" } %>
+              <% end %>
+            <!--   <div class="change-pass">
+                <div class="row">
+                    <div class="col-xs-12">
+                      <h4>Skills:</h4>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="frm-grp-inr">
+                        <%#= f.select(:therapist_skills, options_for_select(Skill.all.pluck(:name),
+                            f.object.therapist_skills),{ }, multiple: "multiple",class: 'form-control js-example-basic-multiple') %>
+                      </div>
+                    </div>
+                </div>
+              </div> -->
+              <% if current_user == resource %>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                <% end %>
+                <div class="change-pass">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h4>Change Password (leave blank if you don't want to change it):</h4>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Current Password</label>
+                        <%= f.password_field :current_password, class: "form-control"%>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>New Password
+                          <% if @minimum_password_length %>
+                          <small>(<%= @minimum_password_length %> characters minimum)</small>
+                          <% end %>
+                        </label>
+                        <%= f.password_field :password, class: "form-control" %>
+
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Confirm password</label>
+                        <%= f.password_field :password_confirmation, class: "form-control"%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="row">
+                <div class="col-xs-12 apnt-info">
+                  <div class="btn-save-update", style="text-align: right" >
+                    <%= f.submit "Update", class: "btn btn-default btn-blue"%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('.js-example-basic-multiple').select2({
+      placeholder: "   Select Your Skills"
+    });
+
+});
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#img_prev').attr('src', e.target.result)
+      };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>

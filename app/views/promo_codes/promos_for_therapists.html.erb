@@ -1,0 +1,48 @@
+<div class="inr-midle-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="registr-inr">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="panrl-body-inr">
+                <div class="panel-bx-login">
+                  <h4>Selected Promo: <%= @promo_code.code%></h4>
+                  <%= form_for 'promo_code', url: promo_codes_sent_promos_to_therapists_path do |f| %>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="frm-grp-inr multiselect">
+                            <div class="row">
+                              <div class="col-md-3">
+                                <%= f.label 'Therapist:'%>
+                              </div>
+                              <div class="col-md-9">
+                                <%= f.hidden_field :promo_code_id, value: @promo_code.id%>
+                                <%= f.collection_select(:email_ids, @therapists, :email, :name_with_email, {}, {:multiple => true, :placeholder => 'Select Therapist'}) %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="submit-btn text-center">
+                      <%= f.submit 'Sent Promo' ,class: "btn btn-default btn-blue"%>
+                    </div>
+                  <% end %>
+                </div>
+                <%= link_to 'Back', promo_codes_path %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#promo_code_email_ids').multipleSelect();
+});
+</script>

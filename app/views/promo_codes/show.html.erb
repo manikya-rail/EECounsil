@@ -1,0 +1,34 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-dtl-rgt">
+          <div class="blg-dtl-img">
+            <p id="notice"><%= notice %></p>
+
+            <p>
+              <strong>Type:</strong>
+              <%= @promo_code.promo_type %>
+            </p>
+
+            <p>
+              <strong>Value:</strong>
+              <%= @promo_code.promo_value %>
+            </p>
+
+            <p>
+              <strong>Code:</strong>
+              <%= @promo_code.code %>
+            </p>
+
+            <p>
+              <strong>Duration in Months:</strong>
+              <%= @promo_code.duration_in_months %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Back', promo_codes_path %>
+  </div>
+</div>

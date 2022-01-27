@@ -1,0 +1,2 @@
+class TherapistRatePerClient < ApplicationRecord
+end

@@ -1,0 +1,23 @@
+<div class="inr-midle-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="registr-inr">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="panrl-body-inr">
+                <div class="panel-bx-login">
+                  <%= render 'form' %><br>
+                  <%= link_to 'Back' , packages_path, class: 'btn btn-default' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :name do %>
+  Add Package
+<% end %>

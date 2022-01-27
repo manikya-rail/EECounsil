@@ -1,0 +1,78 @@
+<% if @payment_plan.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @payment_plan.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+<% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :name, autofocus: true, autocomplete: "Name",
+        class: 'form-control', placeholder: "Name of plan" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.number_field :amount, autofocus: true, autocomplete: "amount",
+        class: 'form-control', placeholder: "Amount" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.select :time_period,[['Monthly','month'], ['Yearly','year']], {}, prompt: 'Select One',
+        class: 'form-control', placeholder: "Amount" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+      <%= f.select :currency, [['$','usd']], {}, prompt: 'Select One',
+        class: 'form-control', placeholder: "Currency"  %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+      <%= f.number_field :trial_period,
+        class: 'form-control', placeholder: "Trial period"  %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr multiselect">
+        <%= f.collection_select(:feature_ids, Feature.all.order(:id), :id, :feature_name, {:selected => @payment_plan.plan_features.map(&:feature_id)}, {:multiple => true, :placeholder => 'Select Feature'}) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="submit-btn text-center">
+  <%= f.submit  @payment_plan.new_record? ? 'Add Plan' : 'Update Plan' ,class: "btn btn-default btn-blue"%>
+</div>
+
+
+
+
+
+<script>
+$(document).ready(function() {
+    $('#payment_plan_feature_ids').multipleSelect();
+    $('.js-example-basic-multiple').select2({
+      placeholder: "   Select Your Skills"
+    });
+});
+</script>

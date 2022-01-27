@@ -1,0 +1,40 @@
+<% if @procedure_code.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @procedure_code.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+<% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :code, autofocus: true, autocomplete: "code",
+        class: 'form-control', placeholder: "Code" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.number_field :duration, autofocus: true, autocomplete: "duration",
+        class: 'form-control', placeholder: "Duration" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :description, autofocus: true, autocomplete: "description",
+        class: 'form-control', placeholder: "description" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="submit-btn text-center">
+  <%= f.submit  @procedure_code.new_record? ? 'Add Procedure Code' : 'Update Procedure Code' ,class: "btn btn-default btn-blue"%>
+</div>

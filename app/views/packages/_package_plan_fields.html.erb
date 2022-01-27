@@ -1,0 +1,45 @@
+<div class='nested-fields'>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+      <%= f.label :Select_plan_type %>:<br/>
+       <%= f.select :plan_type, PackagePlan.plan_types.keys, {}, class: "hide_field",style: "width: 100%;", onchange: "planChange(event)" %><br>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :Quantity %>:
+        <%= f.text_field :quantity, class: "form-control" , placeholder: "Quantity"%>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :Interval %>
+        <%= f.select :interval, PackagePlan.intervals.keys, {}, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group hide_if_text_plan">
+      <div class="frm-grp-inr">
+        <%= f.label :'Time_Duration(In hours)' %>:<br>
+        <%= f.text_field :time_duration_in_hours, autofocus: true, autocomplete: "Time Duration(In hours)",
+          class: 'form-control', placeholder: "Time Duration(In hours)" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :'Price per quantity' %>:<br>
+        <%= f.text_field :price_per_quantity, autofocus: true, autocomplete: "Price per quantity",
+          class: 'form-control', placeholder: "Price per quantity" %>
+      </div>
+    </div>
+  </div>
+  <%= link_to_remove_association "Remove Option", f, class: "btn btn-danger" %>
+</div><br/>

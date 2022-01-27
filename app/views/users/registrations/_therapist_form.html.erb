@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="male">Profile Picture</label>
+      <div class="frm-grp-inr">
+        <%= f.fields_for :profile_picture do |i|%>
+          <%= i.hidden_field :media_type , value: UserMedium.media_types.keys.first %>
+          <%= i.file_field :item, class: 'form-control', placeholder: "Select Profile Picture" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="male">Introduction video</label>
+      <div class="frm-grp-inr">
+        <%= f.fields_for :introduction_video do |i|%>
+          <%= i.hidden_field :media_type , value: UserMedium.media_types.keys.second %>
+          <%= i.file_field :item, class: 'form-control', placeholder: "Select Introduction Video" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name",
+        class: 'form-control', placeholder: "First Name" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name",
+        class: 'form-control', placeholder: "Last Name" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.text_field :email, autofocus: true, autocomplete: "email",
+        class: 'form-control', placeholder: "Email"  %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if !current_user.present? %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="frm-grp-inr">
+          <%= f.password_field :password, class: 'form-control', placeholder: "Password (6 characters minimum)"  %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="frm-grp-inr">
+          <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm Password" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.select(:gender, options_for_select([['Male','male'],['Female','female']]), {:prompt => "Gender"}, class: 'form-control' ) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%=f.text_field :birth_date, "data-provide" => 'datepicker',autofocus: true,
+        class: 'form-control', placeholder: "DOB" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%=f.text_field :phone_number, autofocus: true,
+        class: 'form-control', placeholder: "Phone Number" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.select(:therapist_skills, options_from_collection_for_select(Skill.all, "name", "name"),{ },
+           class: 'form-group js-example-basic-multiple form-control', multiple: "multiple", style: "width: 100%;")%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'users/registrations/address', f: f %>
+
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+      placeholder: "   Select Your Skills"
+    });
+});
+</script>

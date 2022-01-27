@@ -1,0 +1,54 @@
+<%= form_for @questionnaire do |f| %>
+	<% if @questionnaire.errors.any? %>
+    <div id="error_explanation" align="center">
+      <% @questionnaire.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :type %>
+        <%= f.select :question_type, Questionnaire.types, {}, class: "form-control" %><br>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="frm-grp-inr">
+        <%= f.label :question %>
+        <%= f.cktext_area :question, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div id='questionnaire_choices'>
+    <%= f.fields_for :questionnaire_choices do |form| %>
+    <div class='nested-fields'>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="frm-grp-inr">
+              <%= form.label :option %>:
+              <%= form.text_field :option, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="frm-grp-inr">
+              <%= form.label :Select_skill %>:<br/>
+              <%= form.select(:skill, options_from_collection_for_select(Skill.all, "name", "name"), prompt: "Select Skill", class: 'form control', style: 'width: 100%;')%>
+            </div>
+          </div>
+        </div>
+      <%= link_to_remove_association "Remove Option", form, class: 'btn btn-danger' %>
+    </div><br/>
+    <% end %>
+    <div class='links form-group'>
+      <%= link_to_add_association 'Add Option', f ,:questionnaire_choices, class: "btn btn-success"  %>
+    </div>
+  </div></br>
+  <%= f.submit 'Save', class: "btn btn-success" %>
+<% end %>

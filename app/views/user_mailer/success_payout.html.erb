@@ -1,0 +1,9 @@
+<h3>Hello, <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h3>
+
+<h3>Welcome to Ecounsel</h3>
+
+<p>This is a notification mail to notify that ecounsel admin transfered $<%= @amount.to_f/100 %> amount to your bank account for your completed schedules.</p>
+
+<h3>DO NOT REPLY</h3>
+
+<img src="https://admin.ecounsel.com/<%= image_url ("logo-sticky.png") %>">

@@ -1,0 +1,70 @@
+<div class="abt-us-wrp data-table_">
+  <div class="container">
+    <table id="user-datatable" data-source="<%= risk_factors_path %>">
+      <div style="margin: 20px 20px 20px 0px;">
+        <%= link_to 'Add New Risk Factor', new_risk_factor_path, class: 'btn btn-success' %>
+      </div>
+      <hr>
+      <h3><%= 'Risk Factor'%> List </h3>
+
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <script>
+      showRiskFactor = function(id){
+        $.ajax({
+            url: '/risk_factors/'+id,
+            type: 'get',
+          })
+      }
+
+      deleteRiskFactor = function(id){
+        var r = confirm("Do you want to destroy risk factor?");
+        if (r == true) {
+          $(".rowNo"+id).remove()
+          $.ajax({
+            url: '/risk_factors/'+id,
+            type: 'delete',
+          })
+        }
+      }
+
+
+      jQuery(document).ready(function() {
+       var table1 = $('#user-datatable').dataTable({
+          "processing": true,
+          "serverSide": true,
+          "createdRow": function( row, data, dataIndex ) {
+            $(row).addClass( 'rowNo'+data.id );
+          },
+          "columnDefs": [{ "orderable": false, "targets": -1 }],
+          "ajax": $('#user-datatable').data('source'),
+          "pagingType": "full_numbers",
+          "columns": [
+            {"data": "id"},
+            {"data": "title"},
+            {"data": "Action",
+            "render": function(data, type, row, meta){
+                data = "<a href = '/risk_factors/"+row.id+"'  class='btn btn-info'>"+"Show"+ "</a>"
+                data += "<a onClick='deleteRiskFactor("+row.id+");'  class='btn btn-danger margin-left-5' remote='true'>"+"Delete"+ "</a>"
+              return data;
+            }}
+           ]
+         });
+
+      });
+    </script>
+  </div>
+</div>
+
+<% content_for :name do %>
+  List of Risk Factors
+<% end %>

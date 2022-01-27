@@ -1,0 +1,40 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-lst-rgtbar">
+          <div class="bog-rgt-list">
+            <ul class="list-unstyled">
+              <li>
+                <%= link_to 'Add New Video', new_video_path, class: "btn btn-success" %>
+              </li>
+              <li><h3>Videos List</h3></li>
+              <% @videos.each do |video|%>
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="intro_video"><%= video_tag video.media.item.url, class: "img-responsive"%></div>
+                  </div>
+                  <div class="col-md-6">
+                    <h4><%= video.description.html_safe %></h4>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <%= link_to 'View' , video_path(video), class: "btn btn-primary"%>
+                  <%= link_to 'delete', video_path(video), class: "btn btn-danger",
+                        method: :delete, data: {confirm: "Are you sure?"} %>
+                </div>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+  </div>
+</div>
+<% content_for :name do %>
+  Videos
+<% end %>

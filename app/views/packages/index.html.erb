@@ -1,0 +1,39 @@
+<% content_for :name do %>
+  Packages
+<% end %>
+<div class="packages-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="packages-inr">
+          <div class="packages-head"><%= link_to "Add New Package", new_package_path, class: "btn btn-success" %></div>
+          <div class="packages-body"><hr>
+            <h3>Package Lists</h3>
+            <div class="row row-flex">
+              <% @packages.each do |package| %>
+              <div class="col-md-6 col-xs-12">
+                <div class="packag-inr-bx">
+                  <div class="panel panel-default">
+                    <div class="panel-heading"><%= package.name %></div>
+                    <div class="panel-body">
+                      <div class="light-para"><%= package.details.html_safe %></div>
+                      <div class="dark-para">
+                        Validity: <strong><%= package.validity_in_days %></strong>
+                      </div>
+                      <div class="dark-para">
+                        Package Total Price: <strong>$<%= package.package_total %></strong>
+                      </div>
+                    </div>
+                      <%= link_to 'Edit Package', edit_package_path(package), class: "btn btn-default btn-blue" %>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

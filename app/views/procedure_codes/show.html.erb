@@ -1,0 +1,28 @@
+<div class="blog-wrp">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-dtl-rgt">
+          <div class="blg-dtl-img">
+            <p>
+              <strong>Code:</strong>
+              <%= @procedure_code.code %>
+            </p>
+
+            <p>
+              <strong>Description:</strong>
+              <%= @procedure_code.description %>
+            </p>
+
+            <p>
+              <strong>Duration:</strong>
+              <%= @procedure_code.duration %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_procedure_code_path(@procedure_code), class: "btn btn-default btn-blue"%>
+    <%= link_to 'Back', procedure_codes_path, class: 'btn btn-default'%>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="col-sm-12">
+    <h2 align="center"><%= @welcome_msg %></h2>
+    <%= link_to "Blogs", blogs_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Blogs Categories", categories_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Consent Forms", consent_forms_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Courses", courses_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Interventions", interventions_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Packages", packages_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Plans", plans_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Procedure Codes", procedure_codes_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Promo Codes", promo_codes_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Questionnaire", questionnaires_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Risk Factors", risk_factors_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Skills", skills_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Videos", videos_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Payers", payers_path, class: "well well-sm col-sm-12" %>
+    <%= link_to "Service Codes", service_codes_path, class: "well well-sm col-sm-12" %>
+    </div>
+</div>
+<% content_for :name do %>
+  Welcome to eCounsel
+<% end %>
